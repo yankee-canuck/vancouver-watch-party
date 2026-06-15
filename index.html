@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Plan World Cup watch parties with friends around Vancouver."
+    />
+    <title>Vancouver World Cup Watch Parties</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,600;6..72,700&family=Space+Grotesk:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header is-hidden">
+      <button class="back-button header-back is-hidden" id="back-to-character" type="button">← Character</button>
+      <button class="profile-button is-hidden" id="edit-profile" type="button">
+        <span class="mini-avatar" id="header-avatar"></span>
+        <span id="header-name"></span>
+        <span class="profile-edit-label">Edit</span>
+      </button>
+    </header>
+
+    <main>
+      <section class="onboarding" id="onboarding" aria-labelledby="builder-title">
+        <div class="builder-intro">
+          <p class="eyebrow">Welcome to the squad</p>
+          <h1 id="builder-title">Make your matchday mini.</h1>
+          <p class="intro-copy">
+            Pick a look and wear your colours. Your friends will see this character
+            beside your watch-party plans.
+          </p>
+
+          <div class="character-stage" aria-label="Character preview">
+            <div class="vancouver-backdrop" aria-hidden="true">
+              <svg class="vancouver-mountains" viewBox="0 0 420 130">
+                <path d="M0 116 72 42l34 35 54-64 58 72 46-52 44 48 54-62 58 87Z"></path>
+                <path d="m51 64 21-22 16 17M137 40l23-27 24 30M286 58l22-29 22 27"></path>
+              </svg>
+              <svg class="lions-gate-bridge" viewBox="0 0 230 105">
+                <path class="landmark-fill" d="M34 96V30h17v66M179 96V30h17v66"></path>
+                <path class="landmark-line" d="M20 95h190M43 31c19 31 45 45 72 45s53-14 72-45M43 45c22 20 46 29 72 29s50-9 72-29M46 31h137"></path>
+                <path class="landmark-line bridge-hangers" d="M62 50v39M82 64v25M103 74v15M127 74v15M148 64v25M168 50v39"></path>
+              </svg>
+              <svg class="bc-place" viewBox="0 0 150 90">
+                <path class="landmark-fill" d="M12 77h126V61C130 22 20 22 12 61Z"></path>
+                <path class="landmark-line" d="M12 61h126M25 60c9-28 91-28 100 0M41 60c7-20 61-20 68 0M34 77V62M58 77V61M83 77V61M108 77V62"></path>
+              </svg>
+            </div>
+            <div class="stage-field" aria-hidden="true"></div>
+            <span class="home-goal" aria-hidden="true"></span>
+            <div class="character" id="character">
+              <div class="hair hair-short"></div>
+              <div class="head">
+                <div class="brows"></div>
+                <div class="eyes"></div>
+                <div class="mouth mouth-smile"></div>
+              </div>
+              <div class="neck"></div>
+              <div class="body">
+                <div class="jersey-detail"></div>
+                <div class="jersey-crest" id="jersey-crest">CAN</div>
+              </div>
+              <div class="arm arm-left"></div>
+              <div class="arm arm-right"></div>
+              <div class="drink drink-water" aria-hidden="true">
+                <div class="drink-liquid"></div>
+                <span class="stout-glass-holder"></span>
+              </div>
+              <div class="shorts"></div>
+              <div class="leg leg-left"></div>
+              <div class="leg leg-right"></div>
+            </div>
+            <div class="stage-shadow"></div>
+            <div class="jersey-label" id="jersey-label">Canada</div>
+          </div>
+        </div>
+
+        <form class="builder-panel" id="profile-form">
+          <div class="control-group">
+            <label class="control-label" for="display-name">
+              <span>Your name</span>
+              <span class="required">Required</span>
+            </label>
+            <input
+              id="display-name"
+              name="display-name"
+              type="text"
+              maxlength="18"
+              autocomplete="nickname"
+              placeholder="What should we call you?"
+              required
+            />
+          </div>
+
+          <div class="control-group">
+            <span class="control-label">Choose your look</span>
+            <div class="appearance-row">
+              <fieldset>
+                <legend>Skin tone</legend>
+                <div class="swatch-list" id="skin-options"></div>
+              </fieldset>
+              <fieldset>
+                <legend>Hair</legend>
+                <div class="choice-list" id="hair-options"></div>
+              </fieldset>
+              <fieldset class="hair-color-fieldset">
+                <legend>Hair colour</legend>
+                <div class="swatch-list" id="hair-color-options"></div>
+              </fieldset>
+              <fieldset>
+                <legend>Expression</legend>
+                <div class="choice-list" id="face-options"></div>
+              </fieldset>
+              <fieldset class="drink-fieldset">
+                <legend>Drink</legend>
+                <div class="drink-controls">
+                  <div class="choice-list" id="drink-options"></div>
+                  <button
+                    class="option-button drink-option request-option"
+                    id="request-toggle"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="request-suggestion"
+                  >
+                    <span class="request-option-icon">+</span>
+                    <span>Request</span>
+                  </button>
+                </div>
+                <div class="request-suggestion is-hidden" id="request-suggestion">
+                  <input
+                    id="request-suggestion-input"
+                    type="text"
+                    maxlength="80"
+                    placeholder="What drink or dish should we add?"
+                  />
+                  <button class="request-send" id="request-send" type="button">Send</button>
+                </div>
+                <p class="request-feedback is-hidden" id="request-feedback" aria-live="polite"></p>
+              </fieldset>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <span class="control-label">Choose a team jersey</span>
+            <span class="option-section-label">Popular teams</span>
+            <div class="jersey-grid" id="jersey-options"></div>
+            <label class="more-jerseys" for="jersey-more">
+              <span class="option-section-label">More nations</span>
+              <select id="jersey-more" name="jersey-more">
+                <option value="">Choose from every other World Cup team</option>
+              </select>
+            </label>
+          </div>
+
+          <button class="primary-button" type="submit">
+            <span>Join the watch party</span>
+            <span aria-hidden="true">→</span>
+          </button>
+          <p class="privacy-note">No account needed. This profile stays on your device.</p>
+        </form>
+      </section>
+
+      <section class="dashboard is-hidden" id="dashboard" aria-labelledby="schedule-title">
+        <div class="dashboard-hero">
+          <div class="dashboard-hero-copy">
+            <p class="eyebrow">Vancouver watch parties</p>
+            <h1 id="welcome-title">Ready for kickoff?</h1>
+            <p>Pick a match, see where the group is headed, and make your plan.</p>
+          </div>
+          <img class="hero-ball classic-ball" src="assets/world-cup-ball.png" alt="" />
+          <div class="popular-matches" aria-labelledby="popular-matches-title">
+            <p class="popular-matches-title" id="popular-matches-title">Popular now</p>
+            <div class="popular-match-list" id="popular-match-list"></div>
+          </div>
+          <div class="top-guinness" aria-labelledby="top-guinness-title">
+            <p class="popular-matches-title" id="top-guinness-title">Top-rated Guinness</p>
+            <div class="top-guinness-list" id="top-guinness-list"></div>
+          </div>
+        </div>
+
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Coming up</p>
+            <h2 id="schedule-title">Match schedule</h2>
+          </div>
+          <span class="filter-button schedule-count" id="match-count">Loading matches…</span>
+        </div>
+
+        <div class="schedule-filters" aria-label="Filter match schedule">
+          <label>
+            <span>Team</span>
+            <input id="match-team-filter" type="search" placeholder="Search a team" />
+          </label>
+          <label>
+            <span>Date</span>
+            <select id="match-date-filter">
+              <option value="">All dates</option>
+            </select>
+          </label>
+          <label class="watching-filter">
+            <input id="match-watching-filter" type="checkbox" />
+            <span>My matches</span>
+          </label>
+          <button class="clear-filters is-hidden" id="clear-match-filters" type="button">Clear</button>
+        </div>
+
+        <p class="schedule-message is-hidden" id="schedule-message"></p>
+        <div class="match-list" id="match-list"></div>
+      </section>
+
+      <section class="venue-picker is-hidden" id="venue-picker" aria-labelledby="venue-picker-title">
+        <button class="back-button" id="back-to-matches" type="button">← Match schedule</button>
+
+        <div class="venue-match-hero">
+          <div>
+            <p class="eyebrow" id="venue-match-tag"></p>
+            <h1 id="venue-picker-title"></h1>
+            <p id="venue-match-time"></p>
+          </div>
+          <img class="venue-hero-ball classic-ball" src="assets/world-cup-ball.png" alt="" />
+        </div>
+
+        <div class="venue-heading">
+          <div>
+            <p class="eyebrow">Choose a venue</p>
+            <h2>Where do you want to watch?</h2>
+          </div>
+          <p>Select a marker to view the venue, see its vote count, and cast or change your vote.</p>
+        </div>
+        <p class="map-legend">TVs mark confirmed watch parties · Guinness pints mark curated tap stops · Numbers show votes</p>
+
+        <div class="watch-map-layout">
+          <div class="watch-map" id="watch-map" aria-label="Map of Vancouver watch-party venues"></div>
+
+          <aside class="venue-detail" id="venue-detail" aria-live="polite">
+            <div class="venue-detail-empty">
+              <span class="venue-detail-tv watch-tv" aria-hidden="true"></span>
+              <p class="eyebrow">Select a venue</p>
+              <h3>Choose a marker on the map.</h3>
+              <p>The venue address, watch-party details, links, and voting will appear here.</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <script src="vendor/leaflet/leaflet.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

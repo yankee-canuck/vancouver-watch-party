@@ -1,0 +1,9 @@
+ALTER TABLE venues ADD COLUMN latest_photo_url TEXT;
+ALTER TABLE venues ADD COLUMN latest_photo_source_url TEXT;
+ALTER TABLE venues ADD COLUMN latest_photo_source_label TEXT;
+ALTER TABLE venues ADD COLUMN rating_average REAL;
+ALTER TABLE venues ADD COLUMN rating_count INTEGER;
+ALTER TABLE venues ADD COLUMN rating_source_url TEXT;
+ALTER TABLE venues ADD COLUMN menu_url TEXT;
+ALTER TABLE venues ADD COLUMN social_url TEXT;
+ALTER TABLE venues ADD COLUMN details_last_synced_at TEXT;

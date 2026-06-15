@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: vancouver-watch-party
+    runtime: node
+    plan: starter
+    region: oregon
+    buildCommand: npm install
+    startCommand: npm run start:production
+    healthCheckPath: /api/health
+    autoDeployTrigger: commit
+    envVars:
+      - key: NODE_VERSION
+        value: 22.16.0
+      - key: WATCH_PARTY_DB_PATH
+        value: /var/data/watch-party.sqlite
+    disk:
+      name: watch-party-data
+      mountPath: /var/data
+      sizeGB: 1

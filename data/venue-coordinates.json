@@ -1,0 +1,310 @@
+[
+  {
+    "name": "BC Place",
+    "address": "777 Pacific Blvd, Vancouver, BC",
+    "latitude": 49.2766905,
+    "longitude": -123.1120062,
+    "sourceUrl": "https://www.openstreetmap.org/way/24705904"
+  },
+  {
+    "name": "Banter Room",
+    "address": "1039 Mainland St, Vancouver, BC",
+    "latitude": 49.2763183,
+    "longitude": -123.1197396,
+    "sourceUrl": "https://www.openstreetmap.org/node/12703364034"
+  },
+  {
+    "name": "Bells & Whistles",
+    "address": "3296 Fraser St, Vancouver, BC",
+    "latitude": 49.2530311,
+    "longitude": -123.0900035,
+    "sourceUrl": "https://www.openstreetmap.org/way/51469688"
+  },
+  {
+    "name": "Bentall Centre",
+    "address": "Dunsmuir Patio, 1025 Dunsmuir St, Vancouver, BC",
+    "latitude": 49.2863502,
+    "longitude": -123.1200543,
+    "sourceUrl": "https://www.openstreetmap.org/way/1217458668"
+  },
+  {
+    "name": "Brewhall",
+    "address": "97 E 2nd Ave, Vancouver, BC",
+    "latitude": 49.2695303,
+    "longitude": -123.1036822,
+    "sourceUrl": "https://www.openstreetmap.org/way/318642215"
+  },
+  {
+    "name": "CRAFT Beer Market False Creek",
+    "address": "85 W 1st Ave, Vancouver, BC",
+    "latitude": 49.2705826,
+    "longitude": -123.1063854,
+    "sourceUrl": "https://www.openstreetmap.org/way/121647259"
+  },
+  {
+    "name": "Cabana Nightclub",
+    "address": "1163 Granville St, Vancouver, BC",
+    "latitude": 49.277605,
+    "longitude": -123.125761,
+    "sourceUrl": "https://www.openstreetmap.org/node/3957328665"
+  },
+  {
+    "name": "Courtside Food & Drinks",
+    "address": "2415 Main St, Vancouver, BC",
+    "latitude": 49.2634122,
+    "longitude": -123.1011882,
+    "sourceUrl": "https://www.openstreetmap.org/node/7647500334"
+  },
+  {
+    "name": "Darby's Public House",
+    "address": "2001 Macdonald St, Vancouver, BC",
+    "latitude": 49.268155,
+    "longitude": -123.1685962,
+    "sourceUrl": "https://www.openstreetmap.org/way/358370514"
+  },
+  {
+    "name": "Donnellan's Irish Pub",
+    "address": "1082 Granville St, Vancouver, BC",
+    "latitude": 49.2781833,
+    "longitude": -123.1240202,
+    "sourceUrl": "https://www.openstreetmap.org/way/104911670"
+  },
+  {
+    "name": "Dublin Calling",
+    "address": "900 Granville St, Vancouver, BC",
+    "latitude": 49.2800971,
+    "longitude": -123.121444,
+    "sourceUrl": "https://www.openstreetmap.org/node/5401639183"
+  },
+  {
+    "name": "Earls Test Kitchen",
+    "address": "905 Hornby St, Vancouver, BC",
+    "latitude": 49.2815936,
+    "longitude": -123.123754,
+    "sourceUrl": "https://www.openstreetmap.org/node/2070418346"
+  },
+  {
+    "name": "Evolve Grooming",
+    "address": "811 Hornby St, Vancouver, BC",
+    "latitude": 49.2824515,
+    "longitude": -123.12232,
+    "sourceUrl": "https://www.openstreetmap.org/node/9335827490"
+  },
+  {
+    "name": "FIFA Fan Festival Vancouver at Hastings Park / PNE",
+    "address": "2901 E Hastings St, Vancouver, BC",
+    "latitude": 49.2844075,
+    "longitude": -123.0397731,
+    "sourceUrl": "https://www.openstreetmap.org/way/89353340"
+  },
+  {
+    "name": "Good Co. Granville",
+    "address": "965 Granville St, Vancouver, BC",
+    "latitude": 49.2796758,
+    "longitude": -123.12269,
+    "sourceUrl": "https://www.openstreetmap.org/node/651055566"
+  },
+  {
+    "name": "Granville Island Watch Party",
+    "address": "Granville Island, Vancouver, BC",
+    "latitude": 49.270713,
+    "longitude": -123.1342858,
+    "sourceUrl": "https://www.openstreetmap.org/relation/11670779"
+  },
+  {
+    "name": "Hero's Welcome",
+    "address": "3917 Main St, Vancouver, BC",
+    "latitude": 49.2501248,
+    "longitude": -123.1013771,
+    "sourceUrl": "https://www.openstreetmap.org/way/292384725"
+  },
+  {
+    "name": "Hynes' Irish Pub",
+    "address": "3468 W Broadway, Vancouver, BC",
+    "latitude": 49.2641472,
+    "longitude": -123.1812961,
+    "sourceUrl": "https://www.openstreetmap.org/node/13063706620"
+  },
+  {
+    "name": "Junction Public Market",
+    "address": "200 Granville St, Vancouver, BC",
+    "latitude": 49.2867868,
+    "longitude": -123.1123342,
+    "sourceUrl": "https://www.openstreetmap.org/way/128409618"
+  },
+  {
+    "name": "LOCAL Public Eatery Kitsilano",
+    "address": "2210 Cornwall Ave, Vancouver, BC",
+    "latitude": 49.2724075,
+    "longitude": -123.1554539,
+    "sourceUrl": "https://www.openstreetmap.org/way/394667228"
+  },
+  {
+    "name": "Lavantine Restaurant & Skybar",
+    "address": "833 W Pender St, Vancouver, BC",
+    "latitude": 49.285898,
+    "longitude": -123.1162193,
+    "sourceUrl": "https://www.openstreetmap.org/way/706528898"
+  },
+  {
+    "name": "Library Square Pub",
+    "address": "300 W Georgia St, Vancouver, BC",
+    "latitude": 49.2799599,
+    "longitude": -123.114652,
+    "sourceUrl": "https://www.openstreetmap.org/node/4470984671"
+  },
+  {
+    "name": "Lucha Libre Barra & Mexican Restaurant",
+    "address": "722 Nelson St, Vancouver, BC",
+    "latitude": 49.2793936,
+    "longitude": -123.123503,
+    "sourceUrl": "https://www.openstreetmap.org/node/6644732322"
+  },
+  {
+    "name": "Mahony's Tavern False Creek",
+    "address": "601 Stamps Landing, Vancouver, BC",
+    "latitude": 49.2691241,
+    "longitude": -123.1185881,
+    "sourceUrl": "https://www.openstreetmap.org/way/292120592"
+  },
+  {
+    "name": "Malones Taphouse",
+    "address": "608 W Pender St, Vancouver, BC",
+    "latitude": 49.2840215,
+    "longitude": -123.114107,
+    "sourceUrl": "https://www.openstreetmap.org/node/2328938291"
+  },
+  {
+    "name": "Metropolitan Hotel + Diva at the Met",
+    "address": "645 Howe St, Vancouver, BC",
+    "latitude": 49.2840106,
+    "longitude": -123.1183233,
+    "sourceUrl": "https://www.openstreetmap.org/way/143682581"
+  },
+  {
+    "name": "Park Drive",
+    "address": "1815 Commercial Dr, Vancouver, BC",
+    "latitude": 49.2684155,
+    "longitude": -123.0698789,
+    "sourceUrl": "https://www.openstreetmap.org/node/1944641265"
+  },
+  {
+    "name": "Partee Putt Vancouver",
+    "address": "670 Smithe St, Vancouver, BC",
+    "latitude": 49.2800049,
+    "longitude": -123.121323,
+    "sourceUrl": "https://www.openstreetmap.org/way/301876711"
+  },
+  {
+    "name": "Portland Craft",
+    "address": "3835 Main St, Vancouver, BC",
+    "latitude": 49.2506804,
+    "longitude": -123.1013133,
+    "sourceUrl": "https://www.openstreetmap.org/way/292384227"
+  },
+  {
+    "name": "Red Card Sports Bar",
+    "address": "560 Smithe St, Vancouver, BC",
+    "latitude": 49.2793791,
+    "longitude": -123.120222,
+    "sourceUrl": "https://www.openstreetmap.org/node/3940288768"
+  },
+  {
+    "name": "Shamrock Storehouse",
+    "address": "678 Nelson St, Vancouver, BC",
+    "latitude": 49.2790671,
+    "longitude": -123.123001,
+    "sourceUrl": "https://www.openstreetmap.org/node/9211349987"
+  },
+  {
+    "name": "Shark Club / Canada House by Coca-Cola",
+    "address": "180 W Georgia St, Vancouver, BC",
+    "latitude": 49.2790352,
+    "longitude": -123.1132931,
+    "sourceUrl": "https://www.openstreetmap.org/node/6884373733"
+  },
+  {
+    "name": "St. Augustine's",
+    "address": "2360 Commercial Dr, Vancouver, BC",
+    "latitude": 49.263831,
+    "longitude": -123.069503,
+    "sourceUrl": "https://www.openstreetmap.org/node/1932455897"
+  },
+  {
+    "name": "Tap & Barrel Olympic Village",
+    "address": "1 Athletes Way, Vancouver, BC",
+    "latitude": 49.2717876,
+    "longitude": -123.1054301,
+    "sourceUrl": "https://www.openstreetmap.org/way/121142933"
+  },
+  {
+    "name": "The Cascade Room",
+    "address": "2616 Main St, Vancouver, BC",
+    "latitude": 49.2617235,
+    "longitude": -123.1006203,
+    "sourceUrl": "https://www.openstreetmap.org/way/292349077"
+  },
+  {
+    "name": "The Charlatan",
+    "address": "1447 Commercial Dr, Vancouver, BC",
+    "latitude": 49.2715525,
+    "longitude": -123.0698037,
+    "sourceUrl": "https://www.openstreetmap.org/node/11756395868"
+  },
+  {
+    "name": "The King's Head Public House",
+    "address": "1618 Yew St, Vancouver, BC",
+    "latitude": 49.2713039,
+    "longitude": -123.1548459,
+    "sourceUrl": "https://www.openstreetmap.org/node/9065927348"
+  },
+  {
+    "name": "The Mexican Antojitos y Cantina",
+    "address": "1049 Granville St, Vancouver, BC",
+    "latitude": 49.278797,
+    "longitude": -123.124006,
+    "sourceUrl": "https://www.openstreetmap.org/node/5447215521"
+  },
+  {
+    "name": "The Pawn Shop YVR",
+    "address": "1117 Granville St, Vancouver, BC",
+    "latitude": 49.2780334,
+    "longitude": -123.1251115,
+    "sourceUrl": "https://www.openstreetmap.org/node/3799773142"
+  },
+  {
+    "name": "The Pearl",
+    "address": "881 Granville St, Vancouver, BC",
+    "latitude": 49.2807129,
+    "longitude": -123.1213979,
+    "sourceUrl": "https://www.openstreetmap.org/way/301876946"
+  },
+  {
+    "name": "The Rec Room Vancouver",
+    "address": "855 Granville St, Vancouver, BC",
+    "latitude": 49.2808411,
+    "longitude": -123.1209387,
+    "sourceUrl": "https://www.openstreetmap.org/node/12454888380"
+  },
+  {
+    "name": "The Wicklow Pub",
+    "address": "610 Stamps Landing, Vancouver, BC",
+    "latitude": 49.2687109,
+    "longitude": -123.1186399,
+    "sourceUrl": "https://www.openstreetmap.org/node/4349328377"
+  },
+  {
+    "name": "Toby's Pub & Grill",
+    "address": "2733 Commercial Dr, Vancouver, BC",
+    "latitude": 49.2579047,
+    "longitude": -123.0698637,
+    "sourceUrl": "https://www.openstreetmap.org/way/26166290"
+  },
+  {
+    "name": "Yaletown Brewing Company",
+    "address": "1111 Mainland St, Vancouver, BC",
+    "latitude": 49.2755553,
+    "longitude": -123.1208603,
+    "sourceUrl": "https://www.openstreetmap.org/node/7083218786"
+  }
+]
