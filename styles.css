@@ -734,6 +734,19 @@ h1 {
   transform: rotate(-6deg);
 }
 
+.drink-spritz {
+  width: 58px;
+  height: 86px;
+  right: -16px;
+  top: 166px;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  transform: rotate(-5deg);
+}
+
 .stout-glass-art {
   display: none;
 }
@@ -743,17 +756,26 @@ h1 {
 .drink-stout::after,
 .drink-caesar .drink-liquid,
 .drink-caesar::before,
-.drink-caesar::after {
+.drink-caesar::after,
+.drink-spritz .drink-liquid,
+.drink-spritz::before,
+.drink-spritz::after {
   display: none;
 }
 
 .drink-stout .stout-glass-art,
-.drink-caesar .caesar-glass-art {
+.drink-caesar .caesar-glass-art,
+.drink-spritz .spritz-glass-art {
   width: 100%;
   height: 100%;
   display: block;
   overflow: visible;
   filter: drop-shadow(5px 6px 0 rgba(37, 33, 31, 0.28));
+}
+
+.drink-spritz .spritz-glass-art {
+  animation: spritz-sway 3.8s ease-in-out infinite;
+  transform-origin: 50% 82%;
 }
 
 .stout-glass-shell {
@@ -862,6 +884,74 @@ h1 {
   fill: #9b7427;
   stroke: var(--ink);
   stroke-width: 3;
+}
+
+.spritz-glass-art {
+  display: none;
+}
+
+.spritz-shadow,
+.spritz-stem,
+.spritz-base,
+.spritz-rim,
+.spritz-straw {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.spritz-shadow {
+  stroke: rgba(37, 33, 31, 0.24);
+}
+
+.spritz-glass-shell {
+  fill: rgba(226, 244, 251, 0.46);
+  stroke: var(--ink);
+  stroke-width: 4;
+  stroke-linejoin: round;
+}
+
+.spritz-fill {
+  fill: #f46f16;
+  opacity: 0.94;
+}
+
+.spritz-straw {
+  stroke-width: 5;
+}
+
+.spritz-bubbles {
+  fill: #ffd86e;
+  animation: spritz-bubble-rise 2.7s ease-in-out infinite;
+}
+
+.spritz-orange path:first-child {
+  fill: #ffa31d;
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+
+.spritz-orange path:last-child {
+  fill: none;
+  stroke: #ffe174;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.spritz-garnish {
+  fill: #b7c94d;
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-linejoin: round;
+  transform-origin: 30px 17px;
+  animation: spritz-garnish-wiggle 3.1s ease-in-out infinite;
+}
+
+.spritz-ice {
+  fill: rgba(255, 190, 73, 0.72);
 }
 
 .shorts {
@@ -1130,6 +1220,18 @@ legend {
   display: block;
   overflow: visible;
   filter: drop-shadow(2px 2px 0 rgba(37, 33, 31, 0.22));
+}
+
+.drink-option-art .spritz-glass-art {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+  filter: drop-shadow(2px 2px 0 rgba(37, 33, 31, 0.22));
+}
+
+.drink-option-art .spritz-bubbles {
+  animation-duration: 2.2s;
 }
 
 .hair-option {
@@ -3405,6 +3507,21 @@ select:focus {
   50% { transform: translateY(-4px) rotate(9deg); }
 }
 
+@keyframes spritz-sway {
+  0%, 100% { transform: rotate(-4deg) translateY(0); }
+  50% { transform: rotate(4deg) translateY(-3px); }
+}
+
+@keyframes spritz-bubble-rise {
+  0%, 100% { transform: translateY(4px); opacity: 0.58; }
+  45% { transform: translateY(-5px); opacity: 1; }
+}
+
+@keyframes spritz-garnish-wiggle {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(5deg); }
+}
+
 @media (max-width: 640px) {
   .top-guinness-list {
     grid-template-columns: 1fr;
@@ -3882,6 +3999,9 @@ select:focus {
   .venue-hero-ball,
   .venue-map-marker,
   .venue-detail-tv,
+  .spritz-glass-art,
+  .spritz-bubbles,
+  .spritz-garnish,
   .lions-gate-bridge,
   .bc-place,
   .vancouver-mountains {

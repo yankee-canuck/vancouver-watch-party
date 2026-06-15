@@ -46,6 +46,7 @@ const drinks = [
   { id: "water", label: "Water" },
   { id: "stout", label: "Guinness" },
   { id: "caesar", label: "Ceasar" },
+  { id: "spritz", label: "Spritz" },
 ];
 
 const jerseys = [
@@ -216,6 +217,34 @@ function caesarGlassArt() {
   `;
 }
 
+function spritzGlassArt() {
+  return `
+    <svg class="spritz-glass-art" viewBox="0 0 78 104" aria-hidden="true" focusable="false">
+      <path class="spritz-shadow" d="M12 98h54"></path>
+      <path class="spritz-stem" d="M39 74v23"></path>
+      <path class="spritz-base" d="M25 98h28"></path>
+      <path class="spritz-glass-shell" d="M18 14h42l-6 44c-1 10-7 17-15 17s-14-7-15-17Z"></path>
+      <path class="spritz-fill" d="M21 32h36l-5 25c-2 8-7 14-13 14s-11-6-13-14Z"></path>
+      <path class="spritz-rim" d="M18 14h42"></path>
+      <path class="spritz-straw" d="M49 4 42 57"></path>
+      <g class="spritz-bubbles">
+        <circle cx="32" cy="49" r="2"></circle>
+        <circle cx="45" cy="43" r="1.8"></circle>
+        <circle cx="38" cy="59" r="1.6"></circle>
+      </g>
+      <g class="spritz-orange">
+        <path d="M23 31c11-15 23-20 34-20-2 14-12 24-30 28Z"></path>
+        <path d="M28 31 53 15M34 34l13-19M40 29l14-10"></path>
+      </g>
+      <g class="spritz-garnish">
+        <path d="M24 13c0-7 2-11 6-14-1 8 3 11 0 18m-4-3c-4-5-5-10-3-15 3 6 8 8 8 15"></path>
+        <path d="M57 34c8 1 12 5 13 11-8 0-12-4-13-11Z"></path>
+      </g>
+      <path class="spritz-ice" d="M29 42 39 38l5 11-11 5Zm15 13 11-4 4 12-12 4Z"></path>
+    </svg>
+  `;
+}
+
 function renderOptions() {
   const skinContainer = document.querySelector("#skin-options");
   skins.forEach((skin) => {
@@ -307,6 +336,7 @@ function renderOptions() {
 function drinkOptionLabel(drink) {
   if (drink.id === "stout") return `<span class="drink-option-art">${stoutGlassArt()}</span><span>${drink.label}</span>`;
   if (drink.id === "caesar") return `<span class="drink-option-art">${caesarGlassArt()}</span><span>${drink.label}</span>`;
+  if (drink.id === "spritz") return `<span class="drink-option-art">${spritzGlassArt()}</span><span>${drink.label}</span>`;
   return `<span class="drink-option-glass drink-option-water"><span></span></span><span>${drink.label}</span>`;
 }
 
@@ -1043,6 +1073,7 @@ requestSendButton.addEventListener("click", async () => {
 async function initialize() {
   document.querySelector(".stout-glass-holder").innerHTML = stoutGlassArt();
   document.querySelector(".caesar-glass-holder").innerHTML = caesarGlassArt();
+  document.querySelector(".spritz-glass-holder").innerHTML = spritzGlassArt();
   renderOptions();
   hydrateTournamentBalls();
   hydrateWatchTvs();
