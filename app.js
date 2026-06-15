@@ -456,32 +456,64 @@ function renderMatchList() {
   document.querySelector("#match-count").textContent = filteredMatches.length
     ? `${filteredMatches.length}${filteredMatches.length !== matches.length ? ` of ${matches.length}` : ""} ${stages.size === 1 && stages.has("Group stage") ? "group-stage " : ""}matches`
     : "No matches";
-  clearMatchFiltersButton.classList.toggle("is-hidden", !matchFilters.team && !matchFilters.date && !matchFilters.watching);
-  const matchesByDay = filteredMatches.reduce((groups, match) => {
+  const filtersActive = Boolean(matchFilters.team || matchFilters.date || matchFilters.watching);
+  clearMatchFiltersButton.classList.toggle("is-hidden", !filtersActive);
+  const now = Date.now();
+  const upcomingMatches = filteredMatches.filter((match) => !isPastMatch(match, now));
+  const pastMatches = filteredMatches.filter((match) => isPastMatch(match, now));
+  let matchIndex = 0;
+  const upcomingMarkup = renderMatchDays(upcomingMatches, () => matchIndex++);
+  const pastMarkup = renderMatchDays(pastMatches, () => matchIndex++);
+
+  if (!filteredMatches.length) {
+    container.innerHTML = `<p class="empty-filter-results">No matches fit those filters.</p>`;
+    return;
+  }
+
+  container.innerHTML = [
+    upcomingMarkup || (!filtersActive ? `<p class="empty-filter-results">No upcoming matches fit those filters.</p>` : ""),
+    pastMatches.length
+      ? `<details class="past-matches" ${filtersActive && !upcomingMatches.length ? "open" : ""}>
+          <summary>
+            <span>Past matches</span>
+            <strong>${pastMatches.length} ${pastMatches.length === 1 ? "match" : "matches"}</strong>
+          </summary>
+          ${pastMarkup}
+        </details>`
+      : "",
+  ].join("");
+}
+
+function isPastMatch(match, now = Date.now()) {
+  return new Date(match.kickoffUtc).getTime() + 2 * 60 * 60 * 1000 < now;
+}
+
+function renderMatchDays(dayMatches, nextIndex) {
+  const matchesByDay = dayMatches.reduce((groups, match) => {
     const date = match.kickoffLocal?.slice(0, 10) || match.kickoffUtc.slice(0, 10);
     if (!groups.has(date)) groups.set(date, []);
     groups.get(date).push(match);
     return groups;
   }, new Map());
-  let matchIndex = 0;
-  container.innerHTML = [...matchesByDay.entries()].map(([date, dayMatches]) => {
+
+  return [...matchesByDay.entries()].map(([date, matchesForDay]) => {
     const dateLabel = new Intl.DateTimeFormat("en-CA", {
       timeZone: "America/Vancouver",
       weekday: "long",
       month: "long",
       day: "numeric",
     }).format(new Date(`${date}T12:00:00-07:00`));
-    const cards = dayMatches.map((match) => renderMatchCard(match, matchIndex++)).join("");
+    const cards = matchesForDay.map((match) => renderMatchCard(match, nextIndex())).join("");
     return `
       <section class="match-day" aria-labelledby="match-day-${date}">
         <div class="match-day-heading">
           <h3 id="match-day-${date}">${dateLabel}</h3>
-          <span>${dayMatches.length} ${dayMatches.length === 1 ? "match" : "matches"}</span>
+          <span>${matchesForDay.length} ${matchesForDay.length === 1 ? "match" : "matches"}</span>
         </div>
         <div class="match-day-grid">${cards}</div>
       </section>
     `;
-  }).join("") || `<p class="empty-filter-results">No matches fit those filters.</p>`;
+  }).join("");
 }
 
 function renderMatchCard(match, index) {
