@@ -112,6 +112,31 @@ photo source, average rating, rating source, menu, social profile, and detail
 sync timestamp. The map UI shows an explicit unavailable state until those
 fields are populated; it does not invent venue media or ratings.
 
+## Deploy on Vercel with Supabase
+
+This is the recommended public deployment. Vercel hosts the static site and
+serverless API, while Supabase Postgres permanently stores characters, votes,
+requests, and Guinness ratings.
+
+1. Create a Supabase project.
+2. In Supabase, open **Project Settings → Database → Connection string** and
+   copy the **Session pooler** URI.
+3. Add it to a local `.env` file as `DATABASE_URL`.
+4. Initialize Supabase from the verified local venue and schedule data:
+
+```bash
+npm run bootstrap:supabase
+```
+
+5. Import the GitHub repository into Vercel.
+6. In Vercel project settings, add the same `DATABASE_URL` environment variable
+   for Production, Preview, and Development.
+7. Deploy. The included `vercel.json` routes `/api/*` to the Supabase-backed
+   serverless API.
+
+The GoDaddy domain can remain registered at GoDaddy. Add it in Vercel under
+**Settings → Domains**, then copy Vercel's requested DNS records into GoDaddy.
+
 ## Deploy on Render
 
 The repository includes `render.yaml` for a Node web service with a persistent

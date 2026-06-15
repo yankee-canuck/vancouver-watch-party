@@ -7,6 +7,7 @@
     "start": "node --env-file-if-exists=.env server.js",
     "start:production": "npm run bootstrap && npm start",
     "bootstrap": "node --env-file-if-exists=.env scripts/bootstrap-production.js",
+    "bootstrap:supabase": "npm run db:seed:venues && npm run sync:worldcup && node --env-file-if-exists=.env scripts/bootstrap-supabase.js",
     "db:migrate": "node scripts/migrate.js",
     "db:seed:venues": "node scripts/seed-venues.js",
     "sync:worldcup": "node --env-file-if-exists=.env scripts/sync-worldcup.js",
@@ -14,5 +15,8 @@
     "venue:details": "node scripts/update-venue-details.js",
     "geocode:venues": "node scripts/geocode-venues.js",
     "requests:list": "node scripts/list-option-requests.js"
+  },
+  "dependencies": {
+    "postgres": "^3.4.9"
   }
 }
