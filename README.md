@@ -81,11 +81,14 @@ This prevents unsourced venue content from appearing on the watch map.
 Verified watch-party details can also include `tvCount`, `specials`, and
 `watchPartyDetails`.
 
-View new drink and dish suggestions submitted from the character builder:
+View new drink suggestions submitted from the character builder:
 
 ```bash
 npm run requests:list
 ```
+
+Set `DATABASE_URL` to read production requests from Neon. Without it, the
+command reads the local SQLite database.
 
 ## API
 
@@ -104,8 +107,8 @@ locally created character. Database uniqueness constraints ensure one interest
 record and one venue vote per character per match. Changing venue updates the
 existing vote, and tied winning venues are returned together.
 
-Users can submit drink or dish suggestions from the character builder. These
-are stored separately from character profiles for later backend review.
+Users can submit drink suggestions from the character builder. These are stored
+separately from character profiles for later backend review.
 
 Venue records also support nullable source-backed fields for a latest photo,
 photo source, average rating, rating source, menu, social profile, and detail
