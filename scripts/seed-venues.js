@@ -1,6 +1,15 @@
 import { randomUUID } from "node:crypto";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { prepareDatabase } from "../db/index.js";
 import { venueSeed } from "../db/venue-seed.js";
+
+const rootDir = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
+const coordinatesPath = path.join(rootDir, "data", "venue-coordinates.json");
+const coordinates = fs.existsSync(coordinatesPath)
+  ? new Map(JSON.parse(fs.readFileSync(coordinatesPath, "utf8")).map((venue) => [`${venue.name}|${venue.address}`, venue]))
+  : new Map();
 
 const db = prepareDatabase();
 const now = new Date().toISOString();
@@ -24,6 +33,7 @@ db.exec("BEGIN");
 try {
   const keepIds = [];
   for (const venue of venueSeed) {
+    const cachedCoordinates = coordinates.get(`${venue.name}|${venue.address}`) || {};
     const city = venue.city || (venue.address.includes("North Vancouver") ? "North Vancouver" : "Vancouver");
     const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${venue.name}, ${venue.address}`)}`;
     const values = {
@@ -33,11 +43,11 @@ try {
       neighbourhood: venue.neighbourhood,
       city,
       province: "BC",
-      latitude: venue.latitude ?? null,
-      longitude: venue.longitude ?? null,
+      latitude: venue.latitude ?? cachedCoordinates.latitude ?? null,
+      longitude: venue.longitude ?? cachedCoordinates.longitude ?? null,
       confirmed_world_cup: Number(Boolean(venue.confirmedWorldCup)),
-      geocoding_source_url: venue.geocodingSourceUrl ?? null,
-      geocoded_at: venue.latitude != null ? now : null,
+      geocoding_source_url: venue.geocodingSourceUrl ?? cachedCoordinates.sourceUrl ?? null,
+      geocoded_at: venue.latitude != null || cachedCoordinates.latitude != null ? now : null,
       rating_source_url: venue.ratingSourceUrl || googleMapsUrl,
       venue_type: venue.venueType ?? null,
       reservation_url: venue.reservationUrl ?? null,

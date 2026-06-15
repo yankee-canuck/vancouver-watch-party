@@ -8,6 +8,7 @@
     "start:production": "npm run bootstrap && npm start",
     "bootstrap": "node --env-file-if-exists=.env scripts/bootstrap-production.js",
     "bootstrap:supabase": "npm run db:seed:venues && npm run sync:worldcup && node --env-file-if-exists=.env scripts/bootstrap-supabase.js",
+    "sync:production-coordinates": "node --env-file-if-exists=.env scripts/sync-production-coordinates.js",
     "db:migrate": "node scripts/migrate.js",
     "db:seed:venues": "node scripts/seed-venues.js",
     "sync:worldcup": "node --env-file-if-exists=.env scripts/sync-worldcup.js",

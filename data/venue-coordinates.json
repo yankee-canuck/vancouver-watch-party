@@ -16,9 +16,9 @@
   {
     "name": "Bells & Whistles",
     "address": "3296 Fraser St, Vancouver, BC",
-    "latitude": 49.2530311,
-    "longitude": -123.0900035,
-    "sourceUrl": "https://www.openstreetmap.org/way/51469688"
+    "latitude": 49.2559822,
+    "longitude": -123.089954,
+    "sourceUrl": "https://www.openstreetmap.org/way/475080844"
   },
   {
     "name": "Bentall Centre",
@@ -149,9 +149,9 @@
   {
     "name": "Library Square Pub",
     "address": "300 W Georgia St, Vancouver, BC",
-    "latitude": 49.2799599,
-    "longitude": -123.114652,
-    "sourceUrl": "https://www.openstreetmap.org/node/4470984671"
+    "latitude": 49.2796698,
+    "longitude": -123.115106,
+    "sourceUrl": "https://www.openstreetmap.org/node/11498450597"
   },
   {
     "name": "Lucha Libre Barra & Mexican Restaurant",
@@ -296,15 +296,15 @@
   {
     "name": "Toby's Pub & Grill",
     "address": "2733 Commercial Dr, Vancouver, BC",
-    "latitude": 49.2579047,
-    "longitude": -123.0698637,
-    "sourceUrl": "https://www.openstreetmap.org/way/26166290"
+    "latitude": 49.2814578,
+    "longitude": -123.070462,
+    "sourceUrl": "https://www.openstreetmap.org/way/1461675512"
   },
   {
     "name": "Yaletown Brewing Company",
     "address": "1111 Mainland St, Vancouver, BC",
-    "latitude": 49.2755553,
-    "longitude": -123.1208603,
-    "sourceUrl": "https://www.openstreetmap.org/node/7083218786"
+    "latitude": 49.2755002,
+    "longitude": -123.1209469,
+    "sourceUrl": "https://www.openstreetmap.org/node/7083218787"
   }
 ]
