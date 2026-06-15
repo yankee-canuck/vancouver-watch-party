@@ -691,8 +691,20 @@ function renderVenueMarkers(mappedVenues) {
       selectedVenueId = venue.id;
       renderVenueMarkers(mappedVenues);
       renderVenueDetail();
+      scrollVenueDetailIntoView();
     });
     return marker;
+  });
+}
+
+function scrollVenueDetailIntoView() {
+  if (!window.matchMedia("(max-width: 640px)").matches) return;
+  const detail = document.querySelector("#venue-detail");
+  requestAnimationFrame(() => {
+    detail.scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+      block: "start",
+    });
   });
 }
 
