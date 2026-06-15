@@ -45,6 +45,7 @@ const faces = [
 const drinks = [
   { id: "water", label: "Water" },
   { id: "stout", label: "Guinness" },
+  { id: "caesar", label: "Ceasar" },
 ];
 
 const jerseys = [
@@ -198,6 +199,23 @@ function stoutGlassArt() {
   `;
 }
 
+function caesarGlassArt() {
+  return `
+    <svg class="caesar-glass-art" viewBox="0 0 72 92" aria-hidden="true" focusable="false">
+      <path class="caesar-coaster" d="M12 82h46l6 5H18Z"></path>
+      <path class="caesar-glass-shell" d="M17 18h38l-6 58c-.5 6-5 10-13 10s-12.5-4-13-10Z"></path>
+      <path class="caesar-fill" d="M20 24h32l-5 51c-.4 4-4 7-11 7s-10.6-3-11-7Z"></path>
+      <path class="caesar-rim" d="M17 18h38"></path>
+      <path class="caesar-highlight" d="M28 32l7 6-6 5 7 8-8 4 5 8"></path>
+      <path class="caesar-celery" d="M42 19c4-9 9-12 15-16-3 8-1 11-8 18m-6-1c-1-8 1-13 5-19 1 8 4 12 0 20"></path>
+      <path class="caesar-lime" d="M55 33c8 0 12 4 13 10-7 0-11-3-13-10Z"></path>
+      <path class="caesar-straw" d="M18 4 34 27"></path>
+      <circle class="caesar-garnish" cx="39" cy="19" r="5"></circle>
+      <circle class="caesar-garnish" cx="48" cy="17" r="4"></circle>
+    </svg>
+  `;
+}
+
 function renderOptions() {
   const skinContainer = document.querySelector("#skin-options");
   skins.forEach((skin) => {
@@ -254,9 +272,7 @@ function renderOptions() {
     drinkContainer.appendChild(
       createButton({
         className: "option-button drink-option",
-        label: drink.id === "stout"
-          ? `<span class="drink-option-art">${stoutGlassArt()}</span><span>${drink.label}</span>`
-          : `<span class="drink-option-glass drink-option-water"><span></span></span><span>${drink.label}</span>`,
+        label: drinkOptionLabel(drink),
         title: drink.label,
         dataset: { option: "drink", value: drink.id },
       }),
@@ -286,6 +302,12 @@ function renderOptions() {
       option.textContent = jersey.name;
       moreJerseys.appendChild(option);
     });
+}
+
+function drinkOptionLabel(drink) {
+  if (drink.id === "stout") return `<span class="drink-option-art">${stoutGlassArt()}</span><span>${drink.label}</span>`;
+  if (drink.id === "caesar") return `<span class="drink-option-art">${caesarGlassArt()}</span><span>${drink.label}</span>`;
+  return `<span class="drink-option-glass drink-option-water"><span></span></span><span>${drink.label}</span>`;
 }
 
 function updateCharacter() {
@@ -988,6 +1010,7 @@ requestSendButton.addEventListener("click", async () => {
 
 async function initialize() {
   document.querySelector(".stout-glass-holder").innerHTML = stoutGlassArt();
+  document.querySelector(".caesar-glass-holder").innerHTML = caesarGlassArt();
   renderOptions();
   hydrateTournamentBalls();
   hydrateWatchTvs();
