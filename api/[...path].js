@@ -11,7 +11,7 @@ import {
   setInterest,
   voteForVenue,
 } from "../server/postgres-repository.js";
-import { ApiError } from "../server/repository.js";
+import { ApiError } from "../server/api-error.js";
 
 export default async function handler(request, response) {
   try {

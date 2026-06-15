@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
 import postgres from "postgres";
-import { ApiError } from "./repository.js";
+import { ApiError } from "./api-error.js";
 
 let sql;
 

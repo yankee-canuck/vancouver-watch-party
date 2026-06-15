@@ -1,4 +1,7 @@
 import { randomUUID } from "node:crypto";
+import { ApiError } from "./api-error.js";
+
+export { ApiError } from "./api-error.js";
 
 export function ensureCharacter(db, id, displayName = "Friend", profile = null) {
   if (!id) throw new ApiError(401, "A character ID is required.");
@@ -308,11 +311,4 @@ function venueFromRow(row) {
     voteCount: row.vote_count ?? 0,
     currentCharacterVoted: Boolean(row.current_character_voted),
   };
-}
-
-export class ApiError extends Error {
-  constructor(status, message) {
-    super(message);
-    this.status = status;
-  }
 }
