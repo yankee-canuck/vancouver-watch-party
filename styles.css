@@ -2356,6 +2356,47 @@ legend {
   font-size: 13px;
 }
 
+.venue-attendees {
+  margin-top: 22px;
+  display: grid;
+  gap: 8px;
+}
+
+.venue-attendees-label {
+  margin: 0;
+  color: var(--green-bright);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.venue-attendees .matchday-mini-stack {
+  grid-column: auto;
+  grid-row: auto;
+  max-width: min(520px, 100%);
+  padding-right: 0;
+}
+
+.venue-attendees .matchday-person {
+  width: 80px;
+}
+
+.venue-attendees .matchday-person-name {
+  color: var(--card);
+}
+
+.venue-attendees .matchday-person-team,
+.venue-attendees-empty {
+  color: rgba(255, 250, 241, 0.72);
+}
+
+.venue-attendees-empty {
+  font-size: 13px;
+  font-weight: 700;
+}
+
 .venue-heading {
   margin: 64px 0 30px;
   display: flex;

@@ -602,6 +602,20 @@ function renderInterestedCharacters(characters) {
   }).join("")}</div>`;
 }
 
+function renderVenueAttendees(match) {
+  const container = document.querySelector("#venue-attendees");
+  const characters = match.interestedCharacters || [];
+  container.innerHTML = characters.length
+    ? `
+      <p class="venue-attendees-label">${characters.length} attending</p>
+      ${renderInterestedCharacters(characters)}
+    `
+    : `
+      <p class="venue-attendees-label">No one attending yet</p>
+      <span class="venue-attendees-empty">Be first to attend.</span>
+    `;
+}
+
 function escapeHtml(value) {
   return String(value || "").replace(/[&<>"']/g, (character) => ({
     "&": "&amp;",
@@ -904,6 +918,7 @@ async function showVenuePicker(matchId) {
     timeStyle: "short",
   }).format(new Date(match.kickoffUtc));
   document.querySelector("#venue-match-time").textContent = `${kickoff} · ${match.stadium || match.city || "Venue TBD"}`;
+  renderVenueAttendees(match);
 
   onboarding.classList.add("is-hidden");
   siteHeader.classList.remove("is-hidden");
