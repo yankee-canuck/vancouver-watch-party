@@ -456,16 +456,41 @@ async function loadSchedule() {
 
 function renderPopularMatches() {
   const container = document.querySelector("#popular-match-list");
+  const now = Date.now();
   const popularMatches = [...matches]
+    .filter((match) => isUpcomingMatch(match, now))
     .sort((a, b) => (b.interestedCount || 0) - (a.interestedCount || 0))
     .slice(0, 3);
 
+  if (!popularMatches.length) {
+    container.innerHTML = `<p class="popular-match-empty">No upcoming matches yet.</p>`;
+    return;
+  }
+
   container.innerHTML = popularMatches.map((match) => `
     <button class="popular-match" data-open-popular-match="${match.id}" type="button">
-      <span class="popular-match-teams">${teamWithFlag(match.homeTeamNameSnapshot, match.homeFlagEmoji)} <span class="versus">vs</span> ${teamWithFlag(match.awayTeamNameSnapshot, match.awayFlagEmoji)}</span>
+      <span class="popular-match-copy">
+        <span class="popular-match-teams">${teamWithFlag(match.homeTeamNameSnapshot, match.homeFlagEmoji)} <span class="versus">vs</span> ${teamWithFlag(match.awayTeamNameSnapshot, match.awayFlagEmoji)}</span>
+        <span class="popular-match-date">${formatPopularMatchDate(match)}</span>
+      </span>
       <strong>${match.interestedCount || 0} ${match.interestedCount === 1 ? "attendee" : "attendees"}</strong>
     </button>
   `).join("");
+}
+
+function isUpcomingMatch(match, now = Date.now()) {
+  return new Date(match.kickoffUtc).getTime() > now;
+}
+
+function formatPopularMatchDate(match) {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Vancouver",
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  }).format(new Date(match.kickoffUtc));
 }
 
 function renderTopRatedGuinness() {

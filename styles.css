@@ -1846,6 +1846,21 @@ legend {
   white-space: nowrap;
 }
 
+.popular-match-copy {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.popular-match-date {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .popular-match .team-flag {
   font-size: 13px;
 }
@@ -1853,6 +1868,16 @@ legend {
 .popular-match strong {
   color: var(--clay-dark);
   font-size: 10px;
+}
+
+.popular-match-empty {
+  grid-column: 1 / -1;
+  margin: 0;
+  border: 2px dashed rgba(255, 250, 241, 0.55);
+  border-radius: 5px;
+  padding: 10px;
+  color: rgba(255, 250, 241, 0.78);
+  font-size: 11px;
 }
 
 .hero-ball {
