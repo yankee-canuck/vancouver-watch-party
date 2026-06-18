@@ -69,13 +69,17 @@ export async function getMatch(db, id, characterId) {
 export async function setInterest(db, matchId, characterId, interested) {
   await requireMatch(db, matchId);
   if (interested) {
-    await db`INSERT INTO match_watch_interest (id, match_id, character_id, created_at)
-      VALUES (${randomUUID()}, ${matchId}, ${characterId}, ${new Date().toISOString()})
-      ON CONFLICT(match_id, character_id) DO NOTHING`;
+    await addMatchInterest(db, matchId, characterId);
   } else {
     await db`DELETE FROM match_watch_interest WHERE match_id = ${matchId} AND character_id = ${characterId}`;
   }
   return getMatch(db, matchId, characterId);
+}
+
+async function addMatchInterest(db, matchId, characterId, createdAt = new Date().toISOString()) {
+  await db`INSERT INTO match_watch_interest (id, match_id, character_id, created_at)
+    VALUES (${randomUUID()}, ${matchId}, ${characterId}, ${createdAt})
+    ON CONFLICT(match_id, character_id) DO NOTHING`;
 }
 
 export async function listMatchVenues(db, matchId, characterId) {
@@ -101,6 +105,13 @@ export async function voteForVenue(db, matchId, venueId, characterId) {
   await db`INSERT INTO venue_votes (id, match_id, venue_id, character_id, created_at, updated_at)
     VALUES (${randomUUID()}, ${matchId}, ${venueId}, ${characterId}, ${now}, ${now})
     ON CONFLICT(match_id, character_id) DO UPDATE SET venue_id = excluded.venue_id, updated_at = excluded.updated_at`;
+  await addMatchInterest(db, matchId, characterId, now);
+  return listMatchVenues(db, matchId, characterId);
+}
+
+export async function removeVenueVote(db, matchId, venueId, characterId) {
+  await requireMatch(db, matchId);
+  await db`DELETE FROM venue_votes WHERE match_id = ${matchId} AND venue_id = ${venueId} AND character_id = ${characterId}`;
   return listMatchVenues(db, matchId, characterId);
 }
 

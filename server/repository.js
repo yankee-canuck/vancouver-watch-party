@@ -83,15 +83,19 @@ export function getMatch(db, id, characterId) {
 export function setInterest(db, matchId, characterId, interested) {
   requireMatch(db, matchId);
   if (interested) {
-    db.prepare(`
-      INSERT INTO match_watch_interest (id, match_id, character_id, created_at)
-      VALUES (?, ?, ?, ?)
-      ON CONFLICT(match_id, character_id) DO NOTHING
-    `).run(randomUUID(), matchId, characterId, new Date().toISOString());
+    addMatchInterest(db, matchId, characterId);
   } else {
     db.prepare("DELETE FROM match_watch_interest WHERE match_id = ? AND character_id = ?").run(matchId, characterId);
   }
   return getMatch(db, matchId, characterId);
+}
+
+function addMatchInterest(db, matchId, characterId, createdAt = new Date().toISOString()) {
+  db.prepare(`
+    INSERT INTO match_watch_interest (id, match_id, character_id, created_at)
+    VALUES (?, ?, ?, ?)
+    ON CONFLICT(match_id, character_id) DO NOTHING
+  `).run(randomUUID(), matchId, characterId, createdAt);
 }
 
 export function listMatchVenues(db, matchId, characterId) {
@@ -129,6 +133,13 @@ export function voteForVenue(db, matchId, venueId, characterId) {
       venue_id = excluded.venue_id,
       updated_at = excluded.updated_at
   `).run(randomUUID(), matchId, venueId, characterId, now, now);
+  addMatchInterest(db, matchId, characterId, now);
+  return listMatchVenues(db, matchId, characterId);
+}
+
+export function removeVenueVote(db, matchId, venueId, characterId) {
+  requireMatch(db, matchId);
+  db.prepare("DELETE FROM venue_votes WHERE match_id = ? AND venue_id = ? AND character_id = ?").run(matchId, venueId, characterId);
   return listMatchVenues(db, matchId, characterId);
 }
 

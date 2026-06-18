@@ -855,7 +855,11 @@ function renderVenueMarkers(mappedVenues) {
       zIndexOffset: selected ? 1000 : 0,
     }).addTo(venueMap);
     marker.getElement()?.setAttribute("aria-label", `Open ${venue.name}${venue.servesGuinnessTap ? ", Guinness on tap" : ""}, ${venue.voteCount} votes`);
-    marker.on("click", () => {
+    marker.on("click", async () => {
+      if (selected && venue.currentCharacterVoted) {
+        await toggleVenueVote(venue.id);
+        return;
+      }
       selectedVenueId = venue.id;
       renderVenueMarkers(mappedVenues);
       renderVenueDetail();
@@ -870,6 +874,16 @@ function scrollVenueDetailIntoView() {
   const detail = document.querySelector("#venue-detail");
   requestAnimationFrame(() => {
     detail.scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+      block: "start",
+    });
+  });
+}
+
+function scrollVenueMapIntoView() {
+  const map = document.querySelector("#watch-map");
+  requestAnimationFrame(() => {
+    map.scrollIntoView({
       behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
       block: "start",
     });
@@ -968,15 +982,15 @@ function renderVenueDetail() {
       ${guinnessRating}
       ${venue.confirmedWorldCup || venue.servesGuinnessTap ? `
         <button class="primary-button venue-vote-button" data-choose-venue="${venue.id}" type="button">
-          <span>${venue.currentCharacterVoted ? "Your vote is here" : "Vote for this spot"}</span>
-          <span aria-hidden="true">${venue.currentCharacterVoted ? "✓" : "→"}</span>
+          <span>${venue.currentCharacterVoted ? "Remove my vote" : "Vote for this spot"}</span>
+          <span aria-hidden="true">${venue.currentCharacterVoted ? "×" : "→"}</span>
         </button>
       ` : ""}
     </div>
   `;
 }
 
-async function showVenuePicker(matchId) {
+async function showVenuePicker(matchId, options = {}) {
   const match = matches.find((item) => item.id === matchId);
   if (!match) return;
   activeMatchId = matchId;
@@ -1004,8 +1018,33 @@ async function showVenuePicker(matchId) {
     venueMap = null;
   }
   renderVenueMap();
-  setTimeout(() => venueMap?.invalidateSize(), 0);
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  setTimeout(() => {
+    venueMap?.invalidateSize();
+    if (options.focusMap) {
+      scrollVenueMapIntoView();
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, 0);
+}
+
+async function toggleVenueVote(venueId) {
+  const venue = venues.find((item) => item.id === venueId);
+  if (!venue) return;
+  const removingVote = Boolean(venue.currentCharacterVoted);
+  const payload = await apiFetch(`/api/matches/${activeMatchId}/venue-vote`, {
+    method: removingVote ? "DELETE" : "POST",
+    body: JSON.stringify({
+      venueId,
+      profile: removingVote ? undefined : profile,
+    }),
+  });
+  venues = payload.venues;
+  selectedVenueId = removingVote ? "" : venueId;
+  renderVenueMap();
+  await loadSchedule();
+  const match = matches.find((item) => item.id === activeMatchId);
+  if (match) renderVenueAttendees(match);
 }
 
 document.addEventListener("click", async (event) => {
@@ -1027,23 +1066,20 @@ document.addEventListener("click", async (event) => {
 
   const venueButton = event.target.closest("[data-choose-venue]");
   if (venueButton) {
-    const payload = await apiFetch(`/api/matches/${activeMatchId}/venue-vote`, {
-      method: "POST",
-      body: JSON.stringify({ venueId: venueButton.dataset.chooseVenue }),
-    });
-    venues = payload.venues;
-    selectedVenueId = venueButton.dataset.chooseVenue;
-    renderVenueMap();
+    await toggleVenueVote(venueButton.dataset.chooseVenue);
     return;
   }
 
   const interestButton = event.target.closest("[data-toggle-interest]");
   if (interestButton) {
     const match = matches.find((item) => item.id === interestButton.dataset.toggleInterest);
+    const alreadyWatching = Boolean(match.currentCharacterInterested);
     await apiFetch(`/api/matches/${match.id}/interest`, {
-      method: match.currentCharacterInterested ? "DELETE" : "POST",
+      method: alreadyWatching ? "DELETE" : "POST",
+      body: alreadyWatching ? undefined : JSON.stringify({ profile }),
     });
     await loadSchedule();
+    if (!alreadyWatching) await showVenuePicker(match.id, { focusMap: true });
     return;
   }
 

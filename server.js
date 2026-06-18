@@ -13,6 +13,7 @@ import {
   listTopRatedGuinness,
   listVenuesGrouped,
   rateVenueGuinness,
+  removeVenueVote,
   setInterest,
   voteForVenue,
 } from "./server/repository.js";
@@ -99,17 +100,22 @@ async function handleApi(request, response) {
 
   match = url.pathname.match(/^\/api\/matches\/([^/]+)\/interest$/);
   if (match && ["POST", "DELETE"].includes(request.method)) {
-    ensureCharacter(db, characterId, characterName);
+    const body = request.method === "POST" ? await readJson(request) : {};
+    ensureCharacter(db, characterId, characterName, body.profile || null);
     sendJson(response, 200, { match: setInterest(db, match[1], characterId, request.method === "POST") });
     return;
   }
 
   match = url.pathname.match(/^\/api\/matches\/([^/]+)\/venue-vote$/);
-  if (request.method === "POST" && match) {
-    ensureCharacter(db, characterId, characterName);
+  if (match && ["POST", "DELETE"].includes(request.method)) {
     const body = await readJson(request);
     if (!body.venueId) throw new ApiError(400, "venueId is required.");
-    sendJson(response, 200, { venues: voteForVenue(db, match[1], body.venueId, characterId) });
+    ensureCharacter(db, characterId, characterName, request.method === "POST" ? body.profile || null : null);
+    sendJson(response, 200, {
+      venues: request.method === "DELETE"
+        ? removeVenueVote(db, match[1], body.venueId, characterId)
+        : voteForVenue(db, match[1], body.venueId, characterId),
+    });
     return;
   }
 

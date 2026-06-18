@@ -8,6 +8,7 @@ import {
   listTopRatedGuinness,
   listVenuesGrouped,
   rateVenueGuinness,
+  removeVenueVote,
   setInterest,
   voteForVenue,
 } from "../server/postgres-repository.js";
@@ -38,14 +39,18 @@ export default async function handler(request, response) {
     if (request.method === "GET" && match) return send(response, 200, { venues: await listMatchVenues(db, match[1], characterId) });
     match = url.pathname.match(/^\/api\/matches\/([^/]+)\/interest$/);
     if (match && ["POST", "DELETE"].includes(request.method)) {
-      await ensureCharacter(db, characterId, characterName);
+      await ensureCharacter(db, characterId, characterName, request.method === "POST" ? request.body?.profile || null : null);
       return send(response, 200, { match: await setInterest(db, match[1], characterId, request.method === "POST") });
     }
     match = url.pathname.match(/^\/api\/matches\/([^/]+)\/venue-vote$/);
-    if (request.method === "POST" && match) {
-      await ensureCharacter(db, characterId, characterName);
+    if (match && ["POST", "DELETE"].includes(request.method)) {
       if (!request.body?.venueId) throw new ApiError(400, "venueId is required.");
-      return send(response, 200, { venues: await voteForVenue(db, match[1], request.body.venueId, characterId) });
+      await ensureCharacter(db, characterId, characterName, request.method === "POST" ? request.body?.profile || null : null);
+      return send(response, 200, {
+        venues: request.method === "DELETE"
+          ? await removeVenueVote(db, match[1], request.body.venueId, characterId)
+          : await voteForVenue(db, match[1], request.body.venueId, characterId),
+      });
     }
     match = url.pathname.match(/^\/api\/venues\/([^/]+)\/guinness-rating$/);
     if (request.method === "POST" && match) {
