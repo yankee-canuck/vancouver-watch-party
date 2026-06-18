@@ -590,22 +590,19 @@ function renderInterestedCharacters(characters, options = {}) {
     const face = faces.find((item) => item.id === personProfile.face)?.id || "smile";
     const jersey = jerseys.find((item) => item.id === personProfile.jersey) || jerseys[0];
     const drink = drinks.find((item) => item.id === personProfile.drink)?.id || "water";
-    return `
-      <span class="matchday-person" title="${escapeHtml(person.displayName)} · Supports ${escapeHtml(jersey.name)}">
-        <span class="matchday-mini ${full ? "is-full" : ""} mini-hair-${hairStyle}" style="--mini-skin:${skin};--mini-hair:${hair};--mini-jersey:${jersey.main};--mini-alt:${jersey.alt};--mini-trim:${jersey.trim}">
+    const characterMarkup = full
+      ? renderScaledMatchdayCharacter({ skin, hair, hairStyle, face, jersey, drink })
+      : `
+        <span class="matchday-mini mini-hair-${hairStyle}" style="--mini-skin:${skin};--mini-hair:${hair};--mini-jersey:${jersey.main};--mini-alt:${jersey.alt}">
           <span class="mini-person-hair"></span>
           <span class="mini-person-head"></span>
-          ${full ? `
-            <span class="mini-person-eyes"></span>
-            <span class="mini-person-mouth mini-mouth-${face}"></span>
-            <span class="mini-person-arm mini-person-arm-left"></span>
-            <span class="mini-person-arm mini-person-arm-right"></span>
-          ` : ""}
           <span class="mini-person-body"></span>
-          ${full ? `<span class="mini-person-crest">${escapeHtml(jersey.code)}</span>` : ""}
           <span class="mini-person-legs"></span>
-          ${full ? `<span class="mini-person-drink mini-drink-${drink}">${miniDrinkArt(drink)}</span>` : ""}
         </span>
+      `;
+    return `
+      <span class="matchday-person" title="${escapeHtml(person.displayName)} · Supports ${escapeHtml(jersey.name)}">
+        ${characterMarkup}
         <span class="matchday-person-name">${escapeHtml(person.displayName)}</span>
         <span class="matchday-person-team">${escapeHtml(jersey.name)}</span>
       </span>
@@ -613,11 +610,35 @@ function renderInterestedCharacters(characters, options = {}) {
   }).join("")}</div>`;
 }
 
-function miniDrinkArt(drink) {
-  if (drink === "stout") return stoutGlassArt();
-  if (drink === "caesar") return caesarGlassArt();
-  if (drink === "spritz") return spritzGlassArt();
-  return `<span class="mini-water-glass"><span></span></span>`;
+function renderScaledMatchdayCharacter({ skin, hair, hairStyle, face, jersey, drink }) {
+  return `
+    <span class="matchday-character-frame">
+      <span class="character matchday-character" style="--skin:${skin};--hair:${hair};--jersey:${jersey.main};--jersey-alt:${jersey.alt};--jersey-trim:${jersey.trim}">
+        <span class="hair hair-${hairStyle}"></span>
+        <span class="head">
+          <span class="brows"></span>
+          <span class="eyes"></span>
+          <span class="mouth mouth-${face}"></span>
+        </span>
+        <span class="neck"></span>
+        <span class="body">
+          <span class="jersey-detail"></span>
+          <span class="jersey-crest">${escapeHtml(jersey.code)}</span>
+        </span>
+        <span class="arm arm-left"></span>
+        <span class="arm arm-right"></span>
+        <span class="drink drink-${drink}" aria-hidden="true">
+          <span class="drink-liquid"></span>
+          <span class="stout-glass-holder">${stoutGlassArt()}</span>
+          <span class="caesar-glass-holder">${caesarGlassArt()}</span>
+          <span class="spritz-glass-holder">${spritzGlassArt()}</span>
+        </span>
+        <span class="shorts"></span>
+        <span class="leg leg-left"></span>
+        <span class="leg leg-right"></span>
+      </span>
+    </span>
+  `;
 }
 
 function renderVenueAttendees(match) {
