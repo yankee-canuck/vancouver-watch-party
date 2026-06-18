@@ -579,21 +579,32 @@ function renderMatchCard(match, index) {
     `;
 }
 
-function renderInterestedCharacters(characters) {
+function renderInterestedCharacters(characters, options = {}) {
   if (!characters.length) return "";
-  return `<div class="matchday-mini-stack" aria-label="${characters.length} interested ${characters.length === 1 ? "person" : "people"}">${characters.map((person) => {
+  const full = options.variant === "full";
+  return `<div class="matchday-mini-stack ${full ? "is-full" : ""}" aria-label="${characters.length} interested ${characters.length === 1 ? "person" : "people"}">${characters.map((person) => {
     const personProfile = person.profile || {};
     const skin = skins.find((item) => item.id === personProfile.skin)?.color || skins[1].color;
     const hair = hairColors.find((item) => item.id === personProfile.hairColor)?.color || hairColors[0].color;
     const hairStyle = hairStyles.find((item) => item.id === personProfile.hair)?.id || "fade";
+    const face = faces.find((item) => item.id === personProfile.face)?.id || "smile";
     const jersey = jerseys.find((item) => item.id === personProfile.jersey) || jerseys[0];
+    const drink = drinks.find((item) => item.id === personProfile.drink)?.id || "water";
     return `
       <span class="matchday-person" title="${escapeHtml(person.displayName)} · Supports ${escapeHtml(jersey.name)}">
-        <span class="matchday-mini mini-hair-${hairStyle}" style="--mini-skin:${skin};--mini-hair:${hair};--mini-jersey:${jersey.main};--mini-alt:${jersey.alt}">
+        <span class="matchday-mini ${full ? "is-full" : ""} mini-hair-${hairStyle}" style="--mini-skin:${skin};--mini-hair:${hair};--mini-jersey:${jersey.main};--mini-alt:${jersey.alt};--mini-trim:${jersey.trim}">
           <span class="mini-person-hair"></span>
           <span class="mini-person-head"></span>
+          ${full ? `
+            <span class="mini-person-eyes"></span>
+            <span class="mini-person-mouth mini-mouth-${face}"></span>
+            <span class="mini-person-arm mini-person-arm-left"></span>
+            <span class="mini-person-arm mini-person-arm-right"></span>
+          ` : ""}
           <span class="mini-person-body"></span>
+          ${full ? `<span class="mini-person-crest">${escapeHtml(jersey.code)}</span>` : ""}
           <span class="mini-person-legs"></span>
+          ${full ? `<span class="mini-person-drink mini-drink-${drink}">${miniDrinkArt(drink)}</span>` : ""}
         </span>
         <span class="matchday-person-name">${escapeHtml(person.displayName)}</span>
         <span class="matchday-person-team">${escapeHtml(jersey.name)}</span>
@@ -602,13 +613,20 @@ function renderInterestedCharacters(characters) {
   }).join("")}</div>`;
 }
 
+function miniDrinkArt(drink) {
+  if (drink === "stout") return stoutGlassArt();
+  if (drink === "caesar") return caesarGlassArt();
+  if (drink === "spritz") return spritzGlassArt();
+  return `<span class="mini-water-glass"><span></span></span>`;
+}
+
 function renderVenueAttendees(match) {
   const container = document.querySelector("#venue-attendees");
   const characters = match.interestedCharacters || [];
   container.innerHTML = characters.length
     ? `
       <p class="venue-attendees-label">${characters.length} attending</p>
-      ${renderInterestedCharacters(characters)}
+      ${renderInterestedCharacters(characters, { variant: "full" })}
     `
     : `
       <p class="venue-attendees-label">No one attending yet</p>

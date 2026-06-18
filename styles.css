@@ -2317,6 +2317,258 @@ legend {
   background: linear-gradient(90deg, var(--ink) 0 42%, transparent 42% 58%, var(--ink) 58%);
 }
 
+.matchday-mini.is-full {
+  width: 76px;
+  height: 112px;
+  filter: drop-shadow(4px 5px 0 rgba(37, 33, 31, 0.28));
+}
+
+.matchday-mini.is-full .mini-person-head {
+  width: 42px;
+  height: 38px;
+  left: 16px;
+  top: 18px;
+  z-index: 2;
+  border-width: 3px;
+  border-radius: 12px 12px 15px 15px;
+}
+
+.matchday-mini.is-full .mini-person-hair {
+  width: 48px;
+  height: 20px;
+  left: 13px;
+  top: 10px;
+  border-width: 3px;
+  border-radius: 13px 13px 5px 5px;
+}
+
+.matchday-mini.is-full.mini-hair-long .mini-person-hair {
+  height: 55px;
+  border-radius: 14px 14px 17px 17px;
+}
+
+.matchday-mini.is-full.mini-hair-curls .mini-person-hair {
+  width: 54px;
+  height: 30px;
+  left: 10px;
+  top: 5px;
+  background:
+    radial-gradient(circle at 15% 60%, var(--mini-hair) 0 7px, var(--ink) 7.5px 10px, transparent 10.5px),
+    radial-gradient(circle at 40% 35%, var(--mini-hair) 0 7px, var(--ink) 7.5px 10px, transparent 10.5px),
+    radial-gradient(circle at 65% 40%, var(--mini-hair) 0 7px, var(--ink) 7.5px 10px, transparent 10.5px),
+    radial-gradient(circle at 88% 63%, var(--mini-hair) 0 7px, var(--ink) 7.5px 10px, transparent 10.5px);
+}
+
+.matchday-mini.is-full.mini-hair-fade .mini-person-hair::after,
+.matchday-mini.is-full.mini-hair-waves .mini-person-hair::after {
+  width: 15px;
+  height: 23px;
+  right: -3px;
+  top: 14px;
+  border-width: 3px;
+  border-top: 0;
+}
+
+.matchday-mini.is-full.mini-hair-buzz .mini-person-hair {
+  height: 12px;
+  top: 14px;
+}
+
+.matchday-mini.is-full.mini-hair-mohawk .mini-person-hair {
+  width: 16px;
+  height: 40px;
+  left: 29px;
+  top: -4px;
+}
+
+.matchday-mini.is-full.mini-hair-waves .mini-person-hair {
+  height: 23px;
+}
+
+.matchday-mini.is-full.mini-hair-bun .mini-person-hair::before {
+  width: 18px;
+  height: 18px;
+  left: 12px;
+  top: -17px;
+  border-width: 3px;
+}
+
+.matchday-mini.is-full.mini-hair-spikes .mini-person-hair {
+  height: 18px;
+  filter: drop-shadow(0 -3px 0 var(--ink));
+}
+
+.matchday-mini.is-full.mini-hair-mullet .mini-person-hair {
+  height: 54px;
+}
+
+.matchday-mini.is-full.mini-hair-pigtails .mini-person-hair::before,
+.matchday-mini.is-full.mini-hair-pigtails .mini-person-hair::after {
+  width: 18px;
+  height: 30px;
+  top: 14px;
+  border-width: 3px;
+}
+
+.matchday-mini.is-full.mini-hair-pigtails .mini-person-hair::before {
+  left: -17px;
+}
+
+.matchday-mini.is-full.mini-hair-pigtails .mini-person-hair::after {
+  right: -17px;
+}
+
+.mini-person-eyes {
+  width: 5px;
+  height: 6px;
+  position: absolute;
+  left: 29px;
+  top: 34px;
+  z-index: 3;
+  border-radius: 50%;
+  background: var(--ink);
+  box-shadow: 18px 0 var(--ink);
+}
+
+.mini-person-mouth {
+  width: 17px;
+  height: 7px;
+  position: absolute;
+  left: 30px;
+  top: 45px;
+  z-index: 3;
+  border-bottom: 3px solid var(--ink);
+}
+
+.mini-mouth-smile {
+  border-radius: 0 0 50% 50%;
+}
+
+.mini-mouth-calm {
+  height: 3px;
+  border-radius: 0;
+}
+
+.mini-mouth-wow {
+  width: 10px;
+  height: 10px;
+  left: 33px;
+  top: 42px;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+}
+
+.matchday-mini.is-full .mini-person-arm {
+  width: 15px;
+  height: 43px;
+  position: absolute;
+  top: 57px;
+  z-index: 1;
+  border: 3px solid var(--ink);
+  border-radius: 9px 9px 12px 12px;
+  background: linear-gradient(to bottom, var(--mini-jersey) 0 43%, var(--mini-skin) 43%);
+}
+
+.mini-person-arm-left {
+  left: 4px;
+  transform: rotate(8deg);
+}
+
+.mini-person-arm-right {
+  right: 4px;
+  transform: rotate(-8deg);
+}
+
+.matchday-mini.is-full .mini-person-body {
+  width: 52px;
+  height: 44px;
+  left: 12px;
+  top: 55px;
+  z-index: 2;
+  border-width: 3px;
+  border-radius: 12px 12px 5px 5px;
+}
+
+.mini-person-crest {
+  min-width: 22px;
+  height: 17px;
+  position: absolute;
+  right: 8px;
+  top: 61px;
+  z-index: 4;
+  border: 2px solid var(--mini-trim);
+  border-radius: 3px;
+  padding: 0 2px;
+  background: var(--card);
+  color: var(--ink);
+  font-size: 7px;
+  font-weight: 900;
+  line-height: 15px;
+  text-align: center;
+}
+
+.matchday-mini.is-full .mini-person-legs {
+  width: 43px;
+  height: 20px;
+  left: 17px;
+  top: 94px;
+  border-width: 3px;
+  border-top: 0;
+}
+
+.mini-person-drink {
+  width: 22px;
+  height: 34px;
+  position: absolute;
+  right: -4px;
+  top: 68px;
+  z-index: 5;
+  transform: rotate(-7deg);
+}
+
+.mini-drink-stout {
+  width: 24px;
+  height: 35px;
+  right: -6px;
+  top: 66px;
+}
+
+.mini-drink-caesar,
+.mini-drink-spritz {
+  width: 25px;
+  height: 39px;
+  right: -8px;
+  top: 63px;
+}
+
+.mini-person-drink .stout-glass-art,
+.mini-person-drink .caesar-glass-art,
+.mini-person-drink .spritz-glass-art {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+  filter: drop-shadow(2px 2px 0 rgba(37, 33, 31, 0.24));
+}
+
+.mini-water-glass {
+  width: 18px;
+  height: 27px;
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border: 3px solid var(--ink);
+  border-radius: 4px 4px 8px 8px;
+  background: rgba(237, 248, 250, 0.8);
+}
+
+.mini-water-glass span {
+  position: absolute;
+  inset: 7px 3px 3px;
+  border-radius: 2px 2px 5px 5px;
+  background: #9fd6e5;
+}
+
 .venue-picker {
   padding: 4vw;
 }
@@ -2379,8 +2631,17 @@ legend {
   padding-right: 0;
 }
 
+.venue-attendees .matchday-mini-stack.is-full {
+  max-width: min(680px, 100%);
+  gap: 12px;
+}
+
 .venue-attendees .matchday-person {
   width: 80px;
+}
+
+.venue-attendees .matchday-mini-stack.is-full .matchday-person {
+  width: 96px;
 }
 
 .venue-attendees .matchday-person-name {
