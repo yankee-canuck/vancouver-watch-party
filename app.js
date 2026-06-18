@@ -49,6 +49,19 @@ const drinks = [
   { id: "spritz", label: "Spritz" },
 ];
 
+const cleatColors = [
+  { id: "black", label: "Black", color: "#1f1a17" },
+  { id: "white", label: "White", color: "#f6f1e7" },
+  { id: "red", label: "Red", color: "#d91f36" },
+  { id: "royal", label: "Royal blue", color: "#2457d6" },
+  { id: "navy", label: "Navy", color: "#1e2f66" },
+  { id: "volt", label: "Volt", color: "#d9f64d" },
+  { id: "green", label: "Green", color: "#31c86a" },
+  { id: "orange", label: "Orange", color: "#f27622" },
+  { id: "pink", label: "Pink", color: "#f14f9f" },
+  { id: "purple", label: "Purple", color: "#7044d6" },
+];
+
 const jerseys = [
   { id: "can", name: "Canada", code: "CAN", main: "#d91e36", alt: "#f6f4e9", trim: "#c7162c" },
   { id: "mex", name: "Mexico", code: "MEX", main: "#126246", alt: "#f3f2e7", trim: "#c82c3a" },
@@ -110,6 +123,7 @@ const profile = {
   hairColor: "black",
   face: "smile",
   drink: "water",
+  cleatColor: "black",
   jersey: "can",
 };
 
@@ -308,6 +322,19 @@ function renderOptions() {
     );
   });
 
+  const cleatColorContainer = document.querySelector("#cleat-color-options");
+  cleatColors.forEach((cleatColor) => {
+    cleatColorContainer.appendChild(
+      createButton({
+        className: "option-button cleat-option",
+        label: `<span class="cleat-option-icon"></span>`,
+        title: `${cleatColor.label} cleats`,
+        dataset: { option: "cleatColor", value: cleatColor.id },
+        style: { "--cleat-swatch": cleatColor.color },
+      }),
+    );
+  });
+
   const jerseyContainer = document.querySelector("#jersey-options");
   jerseys.filter((jersey) => popularJerseyIds.includes(jersey.id)).forEach((jersey) => {
     jerseyContainer.appendChild(
@@ -344,6 +371,7 @@ function updateCharacter() {
   const skin = skins.find((item) => item.id === profile.skin);
   const hairColor = hairColors.find((item) => item.id === profile.hairColor) || hairColors[0];
   const jersey = jerseys.find((item) => item.id === profile.jersey);
+  const cleatColor = cleatColors.find((item) => item.id === profile.cleatColor) || cleatColors[0];
   const hair = character.querySelector(".hair");
   const mouth = character.querySelector(".mouth");
   const drink = character.querySelector(".drink");
@@ -353,6 +381,7 @@ function updateCharacter() {
   document.documentElement.style.setProperty("--jersey", jersey.main);
   document.documentElement.style.setProperty("--jersey-alt", jersey.alt);
   document.documentElement.style.setProperty("--jersey-trim", jersey.trim);
+  document.documentElement.style.setProperty("--cleat-color", cleatColor.color);
   document.querySelector("#jersey-crest").textContent = jersey.code;
   document.querySelector("#jersey-label").textContent = jersey.name;
 
@@ -606,13 +635,14 @@ function characterParts(personProfile = {}) {
     face: faces.find((item) => item.id === personProfile.face)?.id || "smile",
     jersey: jerseys.find((item) => item.id === personProfile.jersey) || jerseys[0],
     drink: drinks.find((item) => item.id === personProfile.drink)?.id || "water",
+    cleatColor: cleatColors.find((item) => item.id === personProfile.cleatColor)?.color || cleatColors[0].color,
   };
 }
 
-function renderScaledMatchdayCharacter({ skin, hair, hairStyle, face, jersey, drink, variant = "compact" }) {
+function renderScaledMatchdayCharacter({ skin, hair, hairStyle, face, jersey, drink, cleatColor, variant = "compact" }) {
   return `
     <span class="matchday-character-frame is-${variant}" aria-hidden="true">
-      <span class="character matchday-character" style="--skin:${skin};--hair:${hair};--jersey:${jersey.main};--jersey-alt:${jersey.alt};--jersey-trim:${jersey.trim}">
+      <span class="character matchday-character" style="--skin:${skin};--hair:${hair};--jersey:${jersey.main};--jersey-alt:${jersey.alt};--jersey-trim:${jersey.trim};--cleat-color:${cleatColor}">
         <span class="hair hair-${hairStyle}"></span>
         <span class="head">
           <span class="brows"></span>
@@ -635,6 +665,8 @@ function renderScaledMatchdayCharacter({ skin, hair, hairStyle, face, jersey, dr
         <span class="shorts"></span>
         <span class="leg leg-left"></span>
         <span class="leg leg-right"></span>
+        <span class="cleat cleat-left"><span class="cleat-laces"></span><span class="cleat-stud cleat-stud-a"></span><span class="cleat-stud cleat-stud-b"></span></span>
+        <span class="cleat cleat-right"><span class="cleat-laces"></span><span class="cleat-stud cleat-stud-a"></span><span class="cleat-stud cleat-stud-b"></span></span>
       </span>
     </span>
   `;
@@ -1138,6 +1170,7 @@ async function initialize() {
       if (!hairStyles.some((hair) => hair.id === profile.hair)) profile.hair = "fade";
       if (!hairColors.some((hairColor) => hairColor.id === profile.hairColor)) profile.hairColor = "black";
       if (!drinks.some((drink) => drink.id === profile.drink)) profile.drink = "water";
+      if (!cleatColors.some((cleatColor) => cleatColor.id === profile.cleatColor)) profile.cleatColor = "black";
       if (!jerseys.some((jersey) => jersey.id === profile.jersey)) profile.jersey = "can";
       delete profile.requestType;
       delete profile.requestDetail;
