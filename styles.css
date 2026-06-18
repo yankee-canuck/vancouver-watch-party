@@ -1828,6 +1828,16 @@ legend {
   white-space: nowrap;
 }
 
+.popular-match-location {
+  overflow: hidden;
+  color: var(--clay-dark);
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .popular-match .team-flag {
   font-size: 13px;
 }

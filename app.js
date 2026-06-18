@@ -472,6 +472,7 @@ function renderPopularMatches() {
       <span class="popular-match-copy">
         <span class="popular-match-teams">${teamWithFlag(match.homeTeamNameSnapshot, match.homeFlagEmoji)} <span class="versus">vs</span> ${teamWithFlag(match.awayTeamNameSnapshot, match.awayFlagEmoji)}</span>
         <span class="popular-match-date">${formatPopularMatchDate(match)}</span>
+        <span class="popular-match-location">${formatPopularMatchLocation(match)}</span>
       </span>
       <strong>${match.interestedCount || 0} ${match.interestedCount === 1 ? "attendee" : "attendees"}</strong>
     </button>
@@ -491,6 +492,13 @@ function formatPopularMatchDate(match) {
     hour: "numeric",
     minute: "2-digit",
   }).format(new Date(match.kickoffUtc));
+}
+
+function formatPopularMatchLocation(match) {
+  const winners = match.winningVenues || [];
+  if (!winners.length) return "No venue votes yet";
+  const label = winners.length > 1 ? "Tied" : "Leading";
+  return `${label} · ${winners.map((venue) => escapeHtml(venue.name)).join(" / ")}`;
 }
 
 function renderTopRatedGuinness() {
