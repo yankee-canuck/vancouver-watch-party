@@ -1001,62 +1001,52 @@ h1 {
 }
 
 .cleat {
-  width: 52px;
-  height: 18px;
+  width: 44px;
+  height: 14px;
   position: absolute;
-  top: 307px;
+  top: 309px;
   z-index: 6;
   border: 4px solid var(--ink);
-  border-radius: 18px 11px 8px 12px;
+  border-radius: 15px 15px 8px 8px;
   background: var(--cleat-color);
-  box-shadow: inset 0 -4px 0 rgba(37, 33, 31, 0.24), 3px 4px 0 rgba(37, 33, 31, 0.22);
+  box-shadow: inset 0 -4px 0 rgba(37, 33, 31, 0.24), 3px 4px 0 rgba(37, 33, 31, 0.2);
 }
 
 .cleat::before {
-  content: "";
-  width: 15px;
-  height: 13px;
-  position: absolute;
-  top: -10px;
-  right: -1px;
-  border: 4px solid var(--ink);
-  border-bottom: 0;
-  border-radius: 13px 13px 0 0;
-  background: var(--cleat-color);
-  box-shadow: inset 0 -4px 0 rgba(37, 33, 31, 0.16);
+  content: none;
 }
 
 .cleat::after {
   content: "";
-  height: 5px;
+  height: 4px;
   position: absolute;
-  right: 3px;
+  right: 4px;
   bottom: 0;
-  left: 5px;
+  left: 4px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.22);
+  background: rgba(37, 33, 31, 0.24);
 }
 
 .cleat-left {
-  left: 35px;
+  left: 43px;
 }
 
 .cleat-right {
-  right: 35px;
+  right: 43px;
 }
 
 .cleat-stud {
   width: 5px;
-  height: 7px;
+  height: 6px;
   position: absolute;
-  bottom: -7px;
+  bottom: -6px;
   border-radius: 0 0 3px 3px;
   background: var(--ink);
 }
 
 .cleat-stud-a {
-  left: 7px;
-  box-shadow: 14px 0 0 var(--ink), 28px 0 0 var(--ink);
+  left: 6px;
+  box-shadow: 13px 0 0 var(--ink), 26px 0 0 var(--ink);
 }
 
 .cleat-stud-b {
@@ -1257,41 +1247,38 @@ legend {
 }
 
 .cleat-option-icon {
-  width: 40px;
-  height: 15px;
+  width: 36px;
+  height: 13px;
   position: relative;
   display: block;
   border: 2px solid var(--ink);
-  border-radius: 15px 9px 5px 8px;
+  border-radius: 13px 13px 6px 6px;
   background: var(--cleat-swatch);
   box-shadow: inset 0 -3px 0 rgba(37, 33, 31, 0.18), 2px 2px 0 rgba(37, 33, 31, 0.16);
-  transform: rotate(-2deg);
+  transform: none;
 }
 
 .cleat-option-icon::before {
   content: "";
-  width: 12px;
-  height: 10px;
   position: absolute;
-  top: -9px;
-  right: -1px;
-  border: 2px solid var(--ink);
-  border-bottom: 0;
-  border-radius: 9px 9px 0 0;
-  background: var(--cleat-swatch);
-  box-shadow: inset 0 -2px 0 rgba(37, 33, 31, 0.16);
+  right: 4px;
+  bottom: 1px;
+  left: 4px;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(37, 33, 31, 0.2);
 }
 
 .cleat-option-icon::after {
   content: "";
   width: 4px;
-  height: 5px;
+  height: 4px;
   position: absolute;
-  left: 6px;
-  bottom: -5px;
+  left: 5px;
+  bottom: -4px;
   border-radius: 0 0 2px 2px;
   background: var(--ink);
-  box-shadow: 12px 0 0 var(--ink), 24px 0 0 var(--ink);
+  box-shadow: 11px 0 0 var(--ink), 22px 0 0 var(--ink);
 }
 
 .drink-option-glass {

@@ -328,7 +328,7 @@ function renderOptions() {
       createButton({
         className: "option-button cleat-option",
         label: `<span class="cleat-option-icon"></span>`,
-        title: `${cleatColor.label} cleats`,
+        title: `${cleatColor.label} shoes`,
         dataset: { option: "cleatColor", value: cleatColor.id },
         style: { "--cleat-swatch": cleatColor.color },
       }),
