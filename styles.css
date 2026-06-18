@@ -1053,25 +1053,25 @@ h1 {
 }
 
 .cleat-laces {
-  width: 4px;
-  height: 13px;
+  width: 3px;
+  height: 9px;
   position: absolute;
-  top: 2px;
-  left: 16px;
+  top: 5px;
+  left: 18px;
   border-radius: 2px;
   background: var(--card);
-  box-shadow: 7px 0 0 var(--card), 14px 0 0 var(--card);
+  box-shadow: 6px 0 0 var(--card), 12px 0 0 var(--card);
   transform: rotate(-48deg);
   z-index: 2;
 }
 
 .cleat-left .cleat-laces {
-  left: 16px;
+  left: 18px;
 }
 
 .cleat-right .cleat-laces {
   right: auto;
-  left: 16px;
+  left: 18px;
 }
 
 .cleat-stud {
@@ -1298,14 +1298,14 @@ legend {
 
 .cleat-option-icon::before {
   content: "";
-  width: 3px;
-  height: 10px;
+  width: 2px;
+  height: 7px;
   position: absolute;
-  left: 13px;
-  top: 2px;
+  left: 14px;
+  top: 4px;
   border-radius: 2px;
   background: var(--card);
-  box-shadow: 6px 0 0 var(--card), 12px 0 0 var(--card);
+  box-shadow: 5px 0 0 var(--card), 10px 0 0 var(--card);
   transform: rotate(-48deg);
 }
 
