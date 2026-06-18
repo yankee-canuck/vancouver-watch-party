@@ -79,14 +79,18 @@ button {
 .mini-avatar {
   width: 33px;
   height: 33px;
+  position: relative;
   display: block;
+  overflow: hidden;
   border-radius: 50%;
-  background:
-    radial-gradient(circle at 39% 42%, var(--ink) 0 2px, transparent 2.5px),
-    radial-gradient(circle at 61% 42%, var(--ink) 0 2px, transparent 2.5px),
-    linear-gradient(to bottom, var(--hair) 0 28%, transparent 28%),
-    var(--skin);
+  background: var(--card);
   border: 3px solid var(--jersey);
+}
+
+.mini-avatar .matchday-character-frame {
+  position: absolute;
+  left: -7px;
+  top: -6px;
 }
 
 .profile-edit-label {
@@ -2120,14 +2124,6 @@ legend {
   gap: 2px;
 }
 
-.matchday-mini {
-  width: 44px;
-  height: 62px;
-  position: relative;
-  display: block;
-  filter: drop-shadow(3px 3px 0 rgba(37, 33, 31, 0.22));
-}
-
 .matchday-person-name {
   width: 100%;
   overflow: hidden;
@@ -2152,184 +2148,32 @@ legend {
   white-space: nowrap;
 }
 
-.mini-person-head {
-  width: 24px;
-  height: 21px;
-  position: absolute;
-  left: 10px;
-  top: 12px;
-  border: 2px solid var(--ink);
-  border-radius: 7px 7px 10px 10px;
-  background: var(--mini-skin);
-}
-
-.mini-person-hair {
-  width: 27px;
-  height: 11px;
-  position: absolute;
-  left: 9px;
-  top: 8px;
-  z-index: 2;
-  border: 2px solid var(--ink);
-  border-radius: 8px 8px 3px 3px;
-  background: var(--mini-hair);
-}
-
-.mini-hair-long .mini-person-hair {
-  height: 32px;
-  z-index: 0;
-  border-radius: 8px 8px 11px 11px;
-}
-
-.mini-hair-long .mini-person-head {
-  z-index: 1;
-}
-
-.mini-hair-curls .mini-person-hair {
-  width: 30px;
-  height: 15px;
-  left: 7px;
-  top: 5px;
-  border: 0;
-  border-radius: 0;
-  background:
-    radial-gradient(circle at 15% 60%, var(--mini-hair) 0 4px, var(--ink) 4.5px 6px, transparent 6.5px),
-    radial-gradient(circle at 40% 35%, var(--mini-hair) 0 4px, var(--ink) 4.5px 6px, transparent 6.5px),
-    radial-gradient(circle at 65% 40%, var(--mini-hair) 0 4px, var(--ink) 4.5px 6px, transparent 6.5px),
-    radial-gradient(circle at 88% 63%, var(--mini-hair) 0 4px, var(--ink) 4.5px 6px, transparent 6.5px);
-}
-
-.mini-hair-fade .mini-person-hair::after {
-  content: "";
-  width: 8px;
-  height: 13px;
-  position: absolute;
-  right: -2px;
-  top: 7px;
-  border: 2px solid var(--ink);
-  border-top: 0;
-  border-radius: 0 0 5px 5px;
-  background: var(--mini-hair);
-}
-
-.mini-hair-buzz .mini-person-hair {
-  height: 7px;
-  top: 10px;
-}
-
-.mini-hair-mohawk .mini-person-hair {
-  width: 10px;
-  height: 25px;
-  left: 17px;
-  top: -5px;
-  border-radius: 8px 8px 2px 2px;
-}
-
-.mini-hair-waves .mini-person-hair {
-  height: 14px;
-  transform: rotate(-4deg);
-}
-
-.mini-hair-waves .mini-person-hair::after {
-  content: "";
-  width: 10px;
-  height: 13px;
-  position: absolute;
-  right: -2px;
-  top: 7px;
-  border: 2px solid var(--ink);
-  border-top: 0;
-  border-radius: 0 0 6px 6px;
-  background: var(--mini-hair);
-}
-
-.mini-hair-bun .mini-person-hair::before {
-  content: "";
-  width: 11px;
-  height: 11px;
-  position: absolute;
-  left: 6px;
-  top: -10px;
-  border: 2px solid var(--ink);
-  border-radius: 50%;
-  background: var(--mini-hair);
-}
-
-.mini-hair-spikes .mini-person-hair {
-  height: 10px;
-  clip-path: polygon(0 100%, 9% 0, 28% 100%, 45% 0, 61% 100%, 82% 0, 100% 100%);
-  filter: drop-shadow(0 -2px 0 var(--ink));
-}
-
-.mini-hair-mullet .mini-person-hair {
-  height: 28px;
-  z-index: 0;
-  border-radius: 8px 8px 9px 3px;
-}
-
-.mini-hair-mullet .mini-person-head {
-  z-index: 1;
-}
-
-.mini-hair-pigtails .mini-person-hair::before,
-.mini-hair-pigtails .mini-person-hair::after {
-  content: "";
-  width: 10px;
-  height: 16px;
-  position: absolute;
-  top: 7px;
-  border: 2px solid var(--ink);
-  border-radius: 50% 50% 5px 5px;
-  background: var(--mini-hair);
-}
-
-.mini-hair-pigtails .mini-person-hair::before {
-  left: -9px;
-}
-
-.mini-hair-pigtails .mini-person-hair::after {
-  right: -9px;
-}
-
-.mini-hair-bald .mini-person-hair {
-  display: none;
-}
-
-.mini-person-body {
-  width: 32px;
-  height: 24px;
-  position: absolute;
-  left: 6px;
-  top: 31px;
-  border: 2px solid var(--ink);
-  border-radius: 7px 7px 3px 3px;
-  background: linear-gradient(100deg, var(--mini-jersey) 0 40%, var(--mini-alt) 40% 61%, var(--mini-jersey) 61%);
-}
-
-.mini-person-legs {
-  width: 27px;
-  height: 10px;
-  position: absolute;
-  left: 9px;
-  top: 53px;
-  border: 2px solid var(--ink);
-  border-top: 0;
-  background: linear-gradient(90deg, var(--ink) 0 42%, transparent 42% 58%, var(--ink) 58%);
-}
-
 .matchday-character-frame {
-  width: 84px;
-  height: 122px;
+  --matchday-character-scale: 0.24;
+  width: 58px;
+  height: 76px;
   position: relative;
   display: block;
   overflow: visible;
+}
+
+.matchday-character-frame.is-full {
+  --matchday-character-scale: 0.39;
+  width: 84px;
+  height: 122px;
+}
+
+.matchday-character-frame.is-avatar {
+  --matchday-character-scale: 0.22;
+  width: 44px;
+  height: 68px;
 }
 
 .matchday-character-frame .character {
   position: absolute;
   left: 0;
   top: 0;
-  transform: scale(0.39);
+  transform: scale(var(--matchday-character-scale));
   transform-origin: top left;
 }
 

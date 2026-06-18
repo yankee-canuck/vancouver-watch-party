@@ -359,6 +359,10 @@ function updateCharacter() {
   hair.className = `hair hair-${profile.hair}`;
   mouth.className = `mouth mouth-${profile.face}`;
   drink.className = `drink drink-${profile.drink}`;
+  document.querySelector("#header-avatar").innerHTML = renderScaledMatchdayCharacter({
+    ...characterParts(profile),
+    variant: "avatar",
+  });
 
   document.querySelectorAll("[data-option]").forEach((button) => {
     const selected = profile[button.dataset.option] === button.dataset.value;
@@ -583,36 +587,31 @@ function renderInterestedCharacters(characters, options = {}) {
   if (!characters.length) return "";
   const full = options.variant === "full";
   return `<div class="matchday-mini-stack ${full ? "is-full" : ""}" aria-label="${characters.length} interested ${characters.length === 1 ? "person" : "people"}">${characters.map((person) => {
-    const personProfile = person.profile || {};
-    const skin = skins.find((item) => item.id === personProfile.skin)?.color || skins[1].color;
-    const hair = hairColors.find((item) => item.id === personProfile.hairColor)?.color || hairColors[0].color;
-    const hairStyle = hairStyles.find((item) => item.id === personProfile.hair)?.id || "fade";
-    const face = faces.find((item) => item.id === personProfile.face)?.id || "smile";
-    const jersey = jerseys.find((item) => item.id === personProfile.jersey) || jerseys[0];
-    const drink = drinks.find((item) => item.id === personProfile.drink)?.id || "water";
-    const characterMarkup = full
-      ? renderScaledMatchdayCharacter({ skin, hair, hairStyle, face, jersey, drink })
-      : `
-        <span class="matchday-mini mini-hair-${hairStyle}" style="--mini-skin:${skin};--mini-hair:${hair};--mini-jersey:${jersey.main};--mini-alt:${jersey.alt}">
-          <span class="mini-person-hair"></span>
-          <span class="mini-person-head"></span>
-          <span class="mini-person-body"></span>
-          <span class="mini-person-legs"></span>
-        </span>
-      `;
+    const parts = characterParts(person.profile || {});
     return `
-      <span class="matchday-person" title="${escapeHtml(person.displayName)} · Supports ${escapeHtml(jersey.name)}">
-        ${characterMarkup}
+      <span class="matchday-person" title="${escapeHtml(person.displayName)} · Supports ${escapeHtml(parts.jersey.name)}">
+        ${renderScaledMatchdayCharacter({ ...parts, variant: full ? "full" : "compact" })}
         <span class="matchday-person-name">${escapeHtml(person.displayName)}</span>
-        <span class="matchday-person-team">${escapeHtml(jersey.name)}</span>
+        <span class="matchday-person-team">${escapeHtml(parts.jersey.name)}</span>
       </span>
     `;
   }).join("")}</div>`;
 }
 
-function renderScaledMatchdayCharacter({ skin, hair, hairStyle, face, jersey, drink }) {
+function characterParts(personProfile = {}) {
+  return {
+    skin: skins.find((item) => item.id === personProfile.skin)?.color || skins[1].color,
+    hair: hairColors.find((item) => item.id === personProfile.hairColor)?.color || hairColors[0].color,
+    hairStyle: hairStyles.find((item) => item.id === personProfile.hair)?.id || "fade",
+    face: faces.find((item) => item.id === personProfile.face)?.id || "smile",
+    jersey: jerseys.find((item) => item.id === personProfile.jersey) || jerseys[0],
+    drink: drinks.find((item) => item.id === personProfile.drink)?.id || "water",
+  };
+}
+
+function renderScaledMatchdayCharacter({ skin, hair, hairStyle, face, jersey, drink, variant = "compact" }) {
   return `
-    <span class="matchday-character-frame">
+    <span class="matchday-character-frame is-${variant}" aria-hidden="true">
       <span class="character matchday-character" style="--skin:${skin};--hair:${hair};--jersey:${jersey.main};--jersey-alt:${jersey.alt};--jersey-trim:${jersey.trim}">
         <span class="hair hair-${hairStyle}"></span>
         <span class="head">
